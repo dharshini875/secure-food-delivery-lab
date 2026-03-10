@@ -1,75 +1,35 @@
-const User = require("../models/user.model")
-const bcrypt = require("bcryptjs")
-const jwt = require("jsonwebtoken")
-
-// REGISTER USER
-exports.registerUser = async (req, res) => {
-
-  try {
-
-    const { username, email, password } = req.body
-
-    const user = new User({
-      username,
-      email,
-      password
-    })
-
-    await user.save()
-
-    res.status(201).json({
-      success: true,
-      message: "User registered successfully"
-    })
-
-  } catch (error) {
-
-    res.status(500).json({ error: error.message })
-
-  }
-
-}
-
-
+const Order = require("../models/order.model")
 
 /*
-TASK 2
+TASK 3
 
-Complete the login authentication logic.
+Create a MongoDB aggregation pipeline that returns
+dashboard analytics.
 
-Steps:
-1. Compare password using bcrypt.compare()
-2. Create JWT payload containing id and username
-3. Generate token using jwt.sign()
-4. Return response containing token and user data
+Requirements:
+
+- Use $match to filter delivered orders
+- Use $lookup to join with users collection
+- Use $facet to return:
+
+  1. totalRevenue
+  2. topRestaurants (top 5 by revenue)
+  3. categoryRevenue
+
+- Use $group, $sort, and $limit where appropriate
 */
 
-exports.loginUser = async (req, res) => {
+exports.getDashboard = async (req, res) => {
 
   try {
 
-    const { email, password } = req.body
-
-    const user = await User.findOne({ email })
-
-    if (!user) {
-      return res.status(401).json({
-        success: false,
-        message: "Invalid email or password"
-      })
-    }
-
-    // TODO: Compare password
-
-    // TODO: Create JWT payload
-
-    // TODO: Generate JWT token
-
-    // TODO: Send success response
+    // TODO: Implement aggregation pipeline
 
   } catch (error) {
 
-    res.status(500).json({ error: error.message })
+    res.status(500).json({
+      error: error.message
+    })
 
   }
 
