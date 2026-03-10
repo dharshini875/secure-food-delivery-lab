@@ -14,3 +14,7 @@
     "mongoose": "^7.0.0"
   }
 }
+"scripts": {
+  "start": "node src/server.js",
+  "seed": "node src/scripts/seedOrders.js"
+}
